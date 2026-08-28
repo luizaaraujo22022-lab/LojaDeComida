@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maria na Cozinha - Gastronomia Caseira & Afeto</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header / Top Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="brand-hero">
+        <div class="logo-circle">
+          <!-- Logo Vetorial Centralizada -->
+          <svg class="logo-svg" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 28 50 C 18 50 14 36 24 26 C 20 12 36 6 46 16 C 56 6 72 12 68 26 C 78 36 74 50 64 50 Z" 
+                  stroke="#4A4A4A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M 46 44 C 46 44 38 36 38 31 C 38 28 40.5 25.5 43.5 25.5 C 45.5 25.5 46 27 46 27 C 46 27 46.5 25.5 48.5 25.5 C 51.5 25.5 54 28 54 31 C 54 36 46 44 46 44 Z" 
+                  stroke="#4A4A4A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M 28 50 L 64 50 L 61 60 L 31 60 Z" 
+                  stroke="#4A4A4A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <div class="brand-text">
+            <span class="brand-title">Maria</span>
+            <span class="brand-subtitle">na cozinha</span>
+            <div class="brand-divider"></div>
+            <span class="brand-phone">81 9 8489.3163</span>
+          </div>
+        </div>
+      </div>
+      <div class="header-tagline">
+        <span class="tag-badge">✨ Cozinha Afetiva & Caseira</span>
+        <h1>Cardápio Digital & Encomendas</h1>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-layout">
+    
+    <!-- Left Column: Menu -->
+    <section class="menu-container">
+      <div class="category-pills">
+        <button class="pill active" onclick="filterCategory('todos')">Todos os Pratos</button>
+        <button class="pill" onclick="filterCategory('principais')">Pratos Principais</button>
+        <button class="pill" onclick="filterCategory('sobremesas')">Sobremesas</button>
+        <button class="pill" onclick="filterCategory('bebidas')">Bebidas</button>
+      </div>
+
+      <div class="products-grid" id="products-grid">
+        <!-- Inserido dinamicamente via JS -->
+      </div>
+    </section>
+
+    <!-- Right Column: Cart & Checkout -->
+    <aside class="cart-sidebar">
+      <div class="cart-card">
+        <div class="cart-header">
+          <div class="cart-title-group">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+            <h2>Seu Pedido</h2>
+          </div>
+          <span class="cart-count-badge" id="cart-count">0 itens</span>
+        </div>
+
+        <!-- Cart List -->
+        <div class="cart-items-list" id="cart-items"></div>
+
+        <!-- Order Form -->
+        <div class="checkout-form">
+          <div class="form-group">
+            <label for="cust-name">Seu Nome</label>
+            <input type="text" id="cust-name" placeholder="Ex: Maria Silva" autocomplete="off">
+          </div>
+
+          <div class="form-group">
+            <label for="cust-address">Endereço de Entrega</label>
+            <input type="text" id="cust-address" placeholder="Rua, Número, Bairro, Ap/Bloco" autocomplete="off">
+          </div>
+
+          <div class="form-group">
+            <label for="pay-method">Forma de Pagamento</label>
+            <div class="select-wrapper">
+              <select id="pay-method">
+                <option value="PIX (Chave enviada na confirmação)">⚡ PIX</option>
+                <option value="Cartão de Crédito / Débito (Na entrega)">💳 Cartão na Entrega</option>
+                <option value="Dinheiro">💵 Dinheiro</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" id="troco-group" style="display: none;">
+            <label for="cust-troco">Troco para quanto?</label>
+            <input type="text" id="cust-troco" placeholder="Ex: R$ 50,00">
+          </div>
+        </div>
+
+        <!-- Summary & Button -->
+        <div class="cart-summary">
+          <div class="summary-line">
+            <span>Subtotal</span>
+            <span id="subtotal-price">R$ 0,00</span>
+          </div>
+          <div class="summary-line total-line">
+            <span>Total</span>
+            <strong id="total-price">R$ 0,00</strong>
+          </div>
+
+          <button class="btn-checkout-wa" onclick="checkout()">
+            <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            <span>Finalizar no WhatsApp</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
